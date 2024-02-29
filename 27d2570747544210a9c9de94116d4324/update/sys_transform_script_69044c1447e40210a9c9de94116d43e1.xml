@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Windows Server IMP">6c5d738047e40210a9c9de94116d4315</map>
+        <order>50</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+
+
+    // Add this code to the onBefore transform map script
+    // Call CMDB API to do Identification and Reconciliation of current row
+    var cmdbUtil = new CMDBTransformUtil();
+    cmdbUtil.setDataSource('ImportSet');
+    cmdbUtil.identifyAndReconcileEnhanced(source, map, log);
+    ignore = true;
+
+    if (cmdbUtil.hasError()) {
+        var errorMessage = cmdbUtil.getError();
+        log.error(errorMessage);
+    } else {
+        log.info('IE Output Payload: ' + cmdbUtil.getOutputPayload());
+        log.info('Imported CI: ' + cmdbUtil.getOutputRecordSysId());
+    }
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-02-19 20:01:02</sys_created_on>
+        <sys_id>69044c1447e40210a9c9de94116d43e1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="Core CMDB IMP" source="x_929486_ccmdb_imp">27d2570747544210a9c9de94116d4324</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Core CMDB IMP">27d2570747544210a9c9de94116d4324</sys_scope>
+        <sys_update_name>sys_transform_script_69044c1447e40210a9c9de94116d43e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-02-19 20:01:02</sys_updated_on>
+        <when>onBefore</when>
+    </sys_transform_script>
+</record_update>
